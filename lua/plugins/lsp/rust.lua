@@ -1,8 +1,14 @@
-local opts = {
+
+status, rt = pcall(require, "rust-tools")
+
+if not status then
+  return
+end
+
+rt.setup({
     -- rust-tools options
     tools = {
       autoSetHints = true,
-      hover_with_actions = true,
       inlay_hints = {
         show_parameter_hints = true,
         parameter_hints_prefix = "",
@@ -15,6 +21,12 @@ local opts = {
     -- https://github.com/rust-analyzer/rust-analyzer/blob/master/docs/user/generated_config.adoc
     -- https://rust-analyzer.github.io/manual.html#features
     server = {
+      on_attach = function(_, bufnr)
+        -- Hover actions
+        vim.keymap.set("n", "<C-space>", rt.hover_actions.hover_actions, { buffer = bufnr })
+        -- Code action groups
+        vim.keymap.set("n", "<Leader>a", rt.code_action_group.code_action_group, { buffer = bufnr })
+      end,
       settings = {
         ["rust-analyzer"] = {
           assist = {
@@ -37,5 +49,4 @@ local opts = {
           },
         }
       },
-  }
-  require('rust-tools').setup(opts)
+  })
