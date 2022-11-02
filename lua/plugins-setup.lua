@@ -104,6 +104,9 @@ return packer.startup(function(use)
 	
 	use { 'CRAG666/code_runner.nvim', requires = 'nvim-lua/plenary.nvim' }
 
+	use { 'phaazon/hop.nvim', branch = 'v2'}
+
+
 	if packer_bootstrap then
 		require("packer").sync()
 	end
