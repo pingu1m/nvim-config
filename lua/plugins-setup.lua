@@ -104,8 +104,14 @@ return packer.startup(function(use)
 	
 	use { 'CRAG666/code_runner.nvim', requires = 'nvim-lua/plenary.nvim' }
 
-	use { 'phaazon/hop.nvim', branch = 'v2'}
+	use 'ggandor/leap.nvim'
 
+	use 'karb94/neoscroll.nvim'
+
+	-- use {
+	-- 	'declancm/cinnamon.nvim',
+	-- 	config = function() require('cinnamon').setup() end
+	--   }
 
 	if packer_bootstrap then
 		require("packer").sync()
